@@ -26,7 +26,8 @@ class NewsRequest extends FormRequest
     {
         return [
             'title' => [Rule::requiredIf($this->isMethod('POST')), 'string', 'max:200'],
-            'content' => [Rule::requiredIf($this->isMethod('POST')), 'string']
+            'content' => [Rule::requiredIf($this->isMethod('POST')), 'string'],
+            'category_id' => [Rule::requiredIf($this->isMethod('POST')), 'integer', 'exists:categories']
         ];
     }
 }

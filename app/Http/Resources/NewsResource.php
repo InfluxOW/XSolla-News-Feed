@@ -19,7 +19,9 @@ class NewsResource extends JsonResource
             'slug' => $this->slug,
             'content' => $this->content,
             'created_at' => (string) $this->created_at,
-            'user' => new UserResource($this->whenLoaded('user'))
+            'rating' => $this->votes_count,
+            'author' => new UsersResource($this->whenLoaded('user')),
+            'category' => new CategoriesResource($this->whenLoaded('category')),
         ];
     }
 }

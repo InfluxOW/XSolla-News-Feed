@@ -43,4 +43,26 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function hasVotedFor(Article $article)
+    {
+        return $article->votes()->where('user_id', $this->id)->exists();
+    }
+
+    public function upvote(Article $article)
+    {
+        $vote = $this->votes()->make();
+        $article->votes()->save($vote);
+    }
+
+    public function downvote(Article $article)
+    {
+        $vote = $article->votes()->where('user_id', $this->id)->first();
+        $vote->delete();
+    }
 }

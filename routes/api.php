@@ -13,12 +13,15 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+/* Auth */
 Route::post('login', 'API\Auth\LoginController@login')->name('login');
 Route::post('register', 'API\Auth\RegisterController@register')->name('register');
+/* Votes */
+Route::post('news/{article:slug}/vote', 'API\VotesController@store')->name('vote.store');
+Route::delete('news/{article:slug}/vote', 'API\VotesController@destroy')->name('vote.destroy');
+/* Categories */
+Route::get('news/categories', 'API\CategoriesController@index')->name('category.index');
+Route::get('news/category/{category:slug}', 'API\CategoriesController@show')->name('category.show');
+/* News */
 Route::apiResource('news', 'API\NewsController')->parameters(['news' => 'article:slug']);
 
