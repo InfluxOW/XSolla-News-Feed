@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'API\Auth\LoginController@login')->name('login');
 Route::post('register', 'API\Auth\RegisterController@register')->name('register');
 /* Votes */
-Route::post('news/{article:slug}/vote', 'API\VotesController@store')->name('vote.store');
-Route::delete('news/{article:slug}/vote', 'API\VotesController@destroy')->name('vote.destroy');
+Route::post('news/{article:slug}/vote', 'API\VotesController@store')->name('votes.store');
+Route::delete('news/{article:slug}/vote', 'API\VotesController@destroy')->name('votes.destroy');
 /* Categories */
-Route::get('news/categories', 'API\CategoriesController@index')->name('category.index');
-Route::get('news/category/{category:slug}', 'API\CategoriesController@show')->name('category.show');
+Route::get('news/categories', 'API\CategoriesController@index')->name('categories.index');
+Route::get('news/categories/{category:slug}', 'API\CategoriesController@show')->name('categories.show');
 /* News */
 Route::apiResource('news', 'API\NewsController')->parameters(['news' => 'article:slug']);
 

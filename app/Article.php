@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'content', 'slug'];
+    protected $fillable = ['title', 'content', 'slug', 'created_at', 'category_id'];
     protected $table = 'news';
     protected $with = ['user', 'category'];
     protected $withCount = ['votes'];
@@ -28,7 +28,7 @@ class Article extends Model
 
     public function setSlugAttribute($value)
     {
-        $slug = slugify("{$value}_" . now()->format('Y-m-d H:i'));
+        $slug = slugify("{$value}_" . $this->created_at->format('Y-m-d H:i'));
 
         $this->attributes['slug'] = $slug;
     }

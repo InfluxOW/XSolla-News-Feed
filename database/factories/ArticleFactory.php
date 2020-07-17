@@ -8,7 +8,8 @@ use Faker\Generator as Faker;
 $factory->define(Article::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(),
-        'content' => $faker->paragraph()
+        'content' => $faker->paragraph(),
+        'created_at' => $faker->dateTimeBetween('-3 months')
     ];
 });
 

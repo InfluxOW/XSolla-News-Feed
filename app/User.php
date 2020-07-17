@@ -56,13 +56,17 @@ class User extends Authenticatable
 
     public function upvote(Article $article)
     {
-        $vote = $this->votes()->make();
-        $article->votes()->save($vote);
+        if (! $this->hasVotedFor($article)) {
+            $vote = $this->votes()->make();
+            $article->votes()->save($vote);
+        }
     }
 
     public function downvote(Article $article)
     {
-        $vote = $article->votes()->where('user_id', $this->id)->first();
-        $vote->delete();
+        if ($this->hasVotedFor($article)) {
+            $vote = $article->votes()->where('user_id', $this->id)->first();
+            $vote->delete();
+        }
     }
 }

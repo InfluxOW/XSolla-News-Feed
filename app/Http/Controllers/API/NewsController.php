@@ -15,9 +15,10 @@ class NewsController extends Controller
         $this->middleware('auth:api')->only('store', 'update', 'destroy');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $news = Article::all();
+        $orderBy = $request->sortByRating == true ? 'votes_count' : 'created_at';
+        $news = Article::orderBy($orderBy, 'desc')->without('category')->get();
 
         return NewsResource::collection($news);
     }

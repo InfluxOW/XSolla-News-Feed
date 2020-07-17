@@ -13,7 +13,7 @@ class NewsObserver
 
     public function updated(Article $article)
     {
-        $slug = slugify("{$article->title}_" . $article->updated_at->format('Y-m-d H:i'));
+        $slug = slugify("{$article->title}_" . $article->created_at->format('Y-m-d H:i'));
 
         if ($article->slug !== $slug) {
             $article->update(['slug' => $article->title]);
