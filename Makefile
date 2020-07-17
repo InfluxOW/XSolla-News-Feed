@@ -6,5 +6,6 @@ setup:
 	php artisan key:generate
 	touch database/database.sqlite
 	php artisan migrate
+	php artisan passport:install
 seed:
 	php artisan db:seed
