@@ -3,6 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Vote;
+use App\User;
+use App\Article;
 use Faker\Generator as Faker;
 
 $factory->define(Vote::class, function (Faker $faker) {
@@ -12,12 +14,8 @@ $factory->define(Vote::class, function (Faker $faker) {
 });
 
 $factory->afterMaking(Vote::class, function ($vote, $faker) {
-    $user = \App\User::inRandomOrder()->take(1)->first();
-    $article = \App\Article::inRandomOrder()->take(1)->first();
-
-    if (Vote::where('user_id', $user->id)->where('article_id', $article->id)->exists()) {
-        return;
-    }
+    $user = User::inRandomOrder()->take(1)->first();
+    $article = Article::inRandomOrder()->take(1)->first();
 
     $vote->user()->associate($user);
     $vote->article()->associate($article);

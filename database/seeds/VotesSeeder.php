@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Vote;
 
 class VotesSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class VotesSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Vote::class, 50)->create();
+        factory(Vote::class, 50)->create();
     }
 }

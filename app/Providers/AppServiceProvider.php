@@ -28,6 +28,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Article::observe(NewsObserver::class);
-        Category::observe(CategoriesObserver::class);
     }
 }

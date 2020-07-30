@@ -25,8 +25,7 @@ class NewsController extends Controller
 
     public function store(NewsRequest $request)
     {
-        $user = $request->user();
-        $article = $user->news()->create($request->validated());
+        $article = $request->user()->createArticle($request->validated());
 
         return new NewsResource($article);
     }
