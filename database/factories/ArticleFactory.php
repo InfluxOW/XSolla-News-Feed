@@ -3,6 +3,8 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Article;
+use App\User;
+use App\Category;
 use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {
@@ -14,8 +16,8 @@ $factory->define(Article::class, function (Faker $faker) {
 });
 
 $factory->afterMaking(Article::class, function ($article, $faker) {
-    $user = \App\User::inRandomOrder()->take(1)->first();
-    $category = \App\Category::inRandomOrder()->take(1)->first();
+    $user = User::inRandomOrder()->take(1)->first();
+    $category = Category::inRandomOrder()->take(1)->first();
 
     $article->user()->associate($user);
     $article->category()->associate($category);

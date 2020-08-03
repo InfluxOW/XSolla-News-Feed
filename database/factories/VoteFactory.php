@@ -12,11 +12,3 @@ $factory->define(Vote::class, function (Faker $faker) {
         //
     ];
 });
-
-$factory->afterMaking(Vote::class, function ($vote, $faker) {
-    $user = User::inRandomOrder()->take(1)->first();
-    $article = Article::inRandomOrder()->take(1)->first();
-
-    $vote->user()->associate($user);
-    $vote->article()->associate($article);
-});
